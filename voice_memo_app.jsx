@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Pause, Download, Trash2, Volume2, Zap, Music } from 'lucide-react';
+import { Play, Pause, Download, Trash2, Volume2, Zap, Music, Sliders } from 'lucide-react';
 
 export default function VoiceMemoApp() {
   const [recordings, setRecordings] = useState([
-    { id: 1, name: 'Interview - Client Meeting', duration: 24, date: '2 hours ago', waveform: [0.2, 0.15, 0.3, 0.25, 0.18, 0.4, 0.35, 0.22] },
-    { id: 2, name: 'Podcast Intro Draft', duration: 12, date: '5 hours ago', waveform: [0.3, 0.25, 0.4, 0.35, 0.28, 0.32, 0.24, 0.18] },
-    { id: 3, name: 'Voiceover Notes', duration: 8, date: '1 day ago', waveform: [0.15, 0.2, 0.25, 0.3, 0.22, 0.26, 0.19, 0.23] },
-    { id: 4, name: 'Band Practice Memo', duration: 18, date: '2 days ago', waveform: [0.35, 0.4, 0.32, 0.28, 0.38, 0.33, 0.29, 0.36] },
+    { id: 1, name: 'Acoustic Guitar - Summer Song', duration: 3, date: '2 hours ago', type: 'guitar', waveform: [0.2, 0.15, 0.3, 0.25, 0.18, 0.4, 0.35, 0.22] },
+    { id: 2, name: 'Guitar Loop - Fingerstyle', duration: 2, date: '5 hours ago', type: 'guitar', waveform: [0.3, 0.25, 0.4, 0.35, 0.28, 0.32, 0.24, 0.18] },
+    { id: 3, name: 'Acoustic Jam - Bedroom', duration: 4, date: '1 day ago', type: 'guitar', waveform: [0.15, 0.2, 0.25, 0.3, 0.22, 0.26, 0.19, 0.23] },
+    { id: 4, name: 'Strumming Practice', duration: 5, date: '2 days ago', type: 'guitar', waveform: [0.35, 0.4, 0.32, 0.28, 0.38, 0.33, 0.29, 0.36] },
   ]);
 
   const [selectedId, setSelectedId] = useState(null);
@@ -39,12 +39,17 @@ export default function VoiceMemoApp() {
       {/* Header */}
       <div className="max-w-6xl mx-auto mb-8">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg">
+          <div className="p-3 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg">
             <Music className="w-6 h-6 text-white" />
           </div>
-          <div>
-            <h1 className="text-3xl font-bold text-white">Voice Studio</h1>
-            <p className="text-slate-400">Transform your recordings into professional audio</p>
+          <div className="flex-1">
+            <div className="flex items-center gap-3">
+              <h1 className="text-3xl font-bold text-white">Voice Studio</h1>
+              <span className="px-3 py-1 bg-gradient-to-r from-amber-500/30 to-orange-500/30 border border-amber-500/50 rounded-full text-xs font-semibold text-amber-300">
+                🎸 Guitar Optimized
+              </span>
+            </div>
+            <p className="text-slate-400">Studio-quality processing with delay, echo & reverb</p>
           </div>
         </div>
       </div>
@@ -83,7 +88,14 @@ export default function VoiceMemoApp() {
 
                     {/* Recording Info */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-white truncate">{recording.name}</h3>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-medium text-white truncate">{recording.name}</h3>
+                        {recording.type === 'guitar' && (
+                          <span className="px-2 py-0.5 bg-amber-500/20 text-amber-300 text-xs rounded font-semibold flex-shrink-0">
+                            🎸
+                          </span>
+                        )}
+                      </div>
                       <p className="text-sm text-slate-400">{recording.duration} min • {recording.date}</p>
                     </div>
 
@@ -130,16 +142,32 @@ export default function VoiceMemoApp() {
                   {/* Processing Steps */}
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center gap-2">
-                      <div className={`w-2 h-2 rounded-full ${processingProgress > 15 ? 'bg-green-500' : 'bg-slate-500'}`}></div>
-                      <span className="text-slate-300">Noise reduction</span>
+                      <div className={`w-2 h-2 rounded-full ${processingProgress > 10 ? 'bg-green-500' : 'bg-slate-500'}`}></div>
+                      <span className="text-slate-300">Noise gate</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className={`w-2 h-2 rounded-full ${processingProgress > 50 ? 'bg-green-500' : 'bg-slate-500'}`}></div>
-                      <span className="text-slate-300">Bass enhancement</span>
+                      <div className={`w-2 h-2 rounded-full ${processingProgress > 20 ? 'bg-green-500' : 'bg-slate-500'}`}></div>
+                      <span className="text-slate-300">Compression</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className={`w-2 h-2 rounded-full ${processingProgress > 30 ? 'bg-green-500' : 'bg-slate-500'}`}></div>
+                      <span className="text-slate-300">EQ warmth</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className={`w-2 h-2 rounded-full ${processingProgress > 45 ? 'bg-green-500' : 'bg-slate-500'}`}></div>
+                      <span className="text-slate-300">Room reverb</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className={`w-2 h-2 rounded-full ${processingProgress > 60 ? 'bg-green-500' : 'bg-slate-500'}`}></div>
+                      <span className="text-slate-300">Delay layer</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className={`w-2 h-2 rounded-full ${processingProgress > 75 ? 'bg-green-500' : 'bg-slate-500'}`}></div>
-                      <span className="text-slate-300">Frequency balancing</span>
+                      <span className="text-slate-300">Echo shimmer</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className={`w-2 h-2 rounded-full ${processingProgress > 90 ? 'bg-green-500' : 'bg-slate-500'}`}></div>
+                      <span className="text-slate-300">Saturation polish</span>
                     </div>
                   </div>
 
@@ -166,20 +194,86 @@ export default function VoiceMemoApp() {
                   </button>
 
                   {/* Enhancement Options */}
-                  <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 border border-slate-700 space-y-3">
-                    <h4 className="text-sm font-semibold text-slate-300">Enhancement Settings</h4>
+                  <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 border border-slate-700 space-y-4">
+                    <div className="flex items-center gap-2 pb-3 border-b border-slate-600">
+                      <Sliders className="w-4 h-4 text-blue-400" />
+                      <h4 className="text-sm font-semibold text-slate-300">Guitar Effects</h4>
+                    </div>
+
+                    {/* Tone Control */}
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-slate-400">Noise Reduction</span>
-                        <span className="text-sm text-blue-400 font-medium">Strong</span>
+                        <span className="text-sm text-slate-400">Warmth & Tone</span>
+                        <span className="text-xs text-blue-400 font-medium bg-blue-500/20 px-2 py-1 rounded">Rich</span>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-slate-400">Bass Boost</span>
-                        <span className="text-sm text-blue-400 font-medium">Medium</span>
+                      <div className="h-1 bg-slate-700 rounded-full overflow-hidden">
+                        <div className="h-full w-2/3 bg-gradient-to-r from-amber-500 to-orange-500"></div>
                       </div>
+                    </div>
+
+                    {/* Reverb */}
+                    <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-slate-400">Clarity</span>
-                        <span className="text-sm text-blue-400 font-medium">High</span>
+                        <span className="text-sm text-slate-400">Room Reverb</span>
+                        <span className="text-xs text-purple-400 font-medium">Studio</span>
+                      </div>
+                      <div className="h-1 bg-slate-700 rounded-full overflow-hidden">
+                        <div className="h-full w-1/2 bg-gradient-to-r from-purple-500 to-blue-500"></div>
+                      </div>
+                    </div>
+
+                    {/* Delay */}
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-400">Delay Time</span>
+                        <span className="text-xs text-cyan-400 font-medium">400ms</span>
+                      </div>
+                      <div className="h-1 bg-slate-700 rounded-full overflow-hidden">
+                        <div className="h-full w-1/3 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+                      </div>
+                    </div>
+
+                    {/* Echo Feedback */}
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-400">Echo Repeats</span>
+                        <span className="text-xs text-indigo-400 font-medium">3x</span>
+                      </div>
+                      <div className="h-1 bg-slate-700 rounded-full overflow-hidden">
+                        <div className="h-full w-2/5 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                      </div>
+                    </div>
+
+                    {/* Compression */}
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-400">Compression</span>
+                        <span className="text-xs text-green-400 font-medium">Even</span>
+                      </div>
+                      <div className="h-1 bg-slate-700 rounded-full overflow-hidden">
+                        <div className="h-full w-1/2 bg-gradient-to-r from-green-500 to-emerald-500"></div>
+                      </div>
+                    </div>
+
+                    {/* Saturation */}
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-400">Saturation</span>
+                        <span className="text-xs text-orange-400 font-medium">Subtle</span>
+                      </div>
+                      <div className="h-1 bg-slate-700 rounded-full overflow-hidden">
+                        <div className="h-full w-1/4 bg-gradient-to-r from-orange-500 to-yellow-500"></div>
+                      </div>
+                    </div>
+
+                    {/* Presence Boost */}
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-400">Presence Boost</span>
+                        <span className="text-xs text-rose-400 font-medium">Clarity</span>
+                      </div>
+                      <div className="h-1 bg-slate-700 rounded-full overflow-hidden">
+                        <div className="h-full w-3/5 bg-gradient-to-r from-rose-500 to-pink-500"></div>
                       </div>
                     </div>
                   </div>

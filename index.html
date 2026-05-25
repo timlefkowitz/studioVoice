@@ -769,12 +769,294 @@
     color: var(--text-dim);
   }
 
+  /* ─── INPUT TABS ───────────────────────────────────────── */
+  .input-tabs {
+    display: flex;
+    gap: 0;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--panel-radius);
+    padding: 5px;
+    margin-bottom: 16px;
+    width: fit-content;
+  }
+
+  .tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    border-radius: calc(var(--panel-radius) - 4px);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .tab-btn svg { width: 16px; height: 16px; }
+
+  .tab-btn.active {
+    color: var(--bg);
+    background: var(--neon);
+    box-shadow: 0 0 16px var(--neon-glow);
+  }
+
+  .tab-btn.active.record-tab {
+    background: #ef4444;
+    box-shadow: 0 0 16px rgba(239,68,68,0.4);
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ─── VOICE MEMOS GUIDE ─────────────────────────────────── */
+  .vm-guide-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 16px;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--neon);
+    background: rgba(0,229,255,0.05);
+    border: 1px solid rgba(0,229,255,0.18);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+
+  .vm-guide-toggle:hover { background: rgba(0,229,255,0.1); }
+  .vm-guide-toggle svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .vm-guide-toggle .toggle-arrow {
+    margin-left: auto;
+    transition: transform 0.25s;
+    color: var(--text-muted);
+  }
+  .vm-guide-toggle.open .toggle-arrow { transform: rotate(180deg); }
+
+  .vm-guide-body {
+    display: none;
+    background: var(--surface);
+    border: 1px solid rgba(0,229,255,0.15);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    overflow: hidden;
+  }
+
+  .vm-guide-body.open { display: block; }
+
+  .vm-method {
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--border);
+  }
+  .vm-method:last-child { border-bottom: none; }
+
+  .vm-method-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--neon);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .vm-method-title span {
+    background: var(--neon);
+    color: var(--bg);
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+
+  .vm-steps { display: flex; flex-direction: column; gap: 10px; }
+
+  .vm-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .vm-step-num {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+  .vm-step em {
+    font-style: normal;
+    color: var(--neon);
+    font-weight: 600;
+  }
+
+  .vm-tip {
+    margin: 14px 22px 18px;
+    padding: 10px 14px;
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--amber);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  /* ─── RECORD PANEL ──────────────────────────────────────── */
+  .record-panel {
+    text-align: center;
+    padding: 40px 24px;
+    border: 2px dashed rgba(239,68,68,0.3);
+    border-radius: var(--panel-radius);
+    background: rgba(239,68,68,0.02);
+    transition: all 0.3s;
+  }
+
+  .record-panel.recording {
+    border-color: rgba(239,68,68,0.7);
+    background: rgba(239,68,68,0.05);
+  }
+
+  .mic-btn {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    border: 2px solid rgba(239,68,68,0.5);
+    background: rgba(239,68,68,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 auto 20px;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  .mic-btn::after {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    border: 1px solid rgba(239,68,68,0.15);
+  }
+
+  .mic-btn:hover { background: rgba(239,68,68,0.18); border-color: rgba(239,68,68,0.8); }
+  .mic-btn svg { width: 36px; height: 36px; stroke: #ef4444; }
+
+  .mic-btn.active {
+    background: #ef4444;
+    border-color: #ef4444;
+    box-shadow: 0 0 40px rgba(239,68,68,0.5);
+    animation: micPulse 1s ease-in-out infinite;
+  }
+
+  .mic-btn.active svg { stroke: white; }
+
+  @keyframes micPulse {
+    0%, 100% { box-shadow: 0 0 30px rgba(239,68,68,0.4); }
+    50% { box-shadow: 0 0 60px rgba(239,68,68,0.7); }
+  }
+
+  .rec-timer {
+    font-size: 32px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-weight: 300;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    transition: color 0.3s;
+  }
+
+  .rec-timer.active { color: #ef4444; }
+
+  .rec-status {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    min-height: 20px;
+  }
+
+  .rec-status .rec-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #ef4444;
+    margin-right: 6px;
+    animation: blink 1s ease-in-out infinite;
+    vertical-align: middle;
+  }
+
+  #liveMeterCanvas {
+    width: 100%;
+    max-width: 400px;
+    height: 56px;
+    display: block;
+    margin: 0 auto 20px;
+    border-radius: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+  }
+
+  .stop-btn {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    background: #ef4444;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin: 0 auto;
+    box-shadow: 0 0 24px rgba(239,68,68,0.4);
+    transition: all 0.2s;
+  }
+
+  .stop-btn.visible { display: flex; }
+  .stop-btn:hover { background: #dc2626; }
+  .stop-btn svg { width: 16px; height: 16px; }
+
+  .rec-note {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 20px;
+    line-height: 1.5;
+  }
+
   /* ─── MOBILE ───────────────────────────────────────────── */
   @media (max-width: 640px) {
     header { padding: 16px 20px; }
     main { padding: 28px 16px 60px; }
     .hero h1 { font-size: 28px; }
     .control-module { padding: 20px 16px; }
+    .input-tabs { width: 100%; }
+    .tab-btn { flex: 1; justify-content: center; padding: 10px 12px; }
   }
 </style>
 </head>
@@ -804,24 +1086,139 @@
     <p>Upload an iPhone voice memo and get a professionally polished recording — noise removed, bass enhanced, dynamically mastered.</p>
   </div>
 
-  <!-- UPLOAD -->
-  <div class="upload-zone" id="uploadZone">
-    <input type="file" id="fileInput" accept="audio/*,.m4a,.mp3,.wav,.aac,.ogg,.flac">
-    <div class="upload-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <polyline points="16 16 12 12 8 16"/>
-        <line x1="12" y1="12" x2="12" y2="21"/>
-        <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>
+  <!-- TABS -->
+  <div class="input-tabs">
+    <button class="tab-btn active" id="tabImport" onclick="switchTab('import')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
       </svg>
+      Import File
+    </button>
+    <button class="tab-btn record-tab" id="tabRecord" onclick="switchTab('record')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/>
+        <path d="M19 10v2a7 7 0 01-14 0v-2"/>
+        <line x1="12" y1="19" x2="12" y2="23"/>
+        <line x1="8" y1="23" x2="16" y2="23"/>
+      </svg>
+      Record Now
+    </button>
+  </div>
+
+  <!-- IMPORT TAB -->
+  <div class="tab-panel active" id="panelImport">
+
+    <!-- Upload Zone -->
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="fileInput" accept=".m4a,.mp3,.wav,.aac,.ogg,.flac,audio/*">
+      <div class="upload-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="16 16 12 12 8 16"/>
+          <line x1="12" y1="12" x2="12" y2="21"/>
+          <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>
+        </svg>
+      </div>
+      <h2>Drop your recording here</h2>
+      <p>Or tap to browse — then follow the guide below to find Voice Memos</p>
+      <div class="formats">
+        <span class="format-pill">M4A</span>
+        <span class="format-pill">MP3</span>
+        <span class="format-pill">WAV</span>
+        <span class="format-pill">AAC</span>
+        <span class="format-pill">FLAC</span>
+      </div>
     </div>
-    <h2>Drop your recording here</h2>
-    <p>Or tap to browse your files</p>
-    <div class="formats">
-      <span class="format-pill">M4A</span>
-      <span class="format-pill">MP3</span>
-      <span class="format-pill">WAV</span>
-      <span class="format-pill">AAC</span>
-      <span class="format-pill">FLAC</span>
+
+    <!-- Voice Memos Guide -->
+    <button class="vm-guide-toggle" id="vmGuideToggle" onclick="toggleVMGuide()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+        <line x1="12" y1="18" x2="12" y2="18"/>
+        <path d="M9 9a3 3 0 015.12 2.14c0 2-3 3-3 3"/>
+      </svg>
+      How to import from iPhone Voice Memos
+      <svg class="toggle-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+
+    <div class="vm-guide-body" id="vmGuideBody">
+
+      <!-- Method A -->
+      <div class="vm-method">
+        <div class="vm-method-title">
+          <span>A</span> Browse directly from the Files app
+        </div>
+        <div class="vm-steps">
+          <div class="vm-step">
+            <div class="vm-step-num">1</div>
+            <div>Tap <em>Import File</em> above, then tap <em>Browse</em> in the bottom-right of the picker that appears.</div>
+          </div>
+          <div class="vm-step">
+            <div class="vm-step-num">2</div>
+            <div>Navigate to <em>iCloud Drive → Voice Memos</em>. Your recordings live there as <em>.m4a</em> files.</div>
+          </div>
+          <div class="vm-step">
+            <div class="vm-step-num">3</div>
+            <div>Tap the recording to import it — done!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Method B -->
+      <div class="vm-method">
+        <div class="vm-method-title">
+          <span>B</span> Share directly from the Voice Memos app
+        </div>
+        <div class="vm-steps">
+          <div class="vm-step">
+            <div class="vm-step-num">1</div>
+            <div>Open the <em>Voice Memos</em> app and tap the recording you want.</div>
+          </div>
+          <div class="vm-step">
+            <div class="vm-step-num">2</div>
+            <div>Tap the <em>••• menu</em> (three dots), then tap <em>Share Recording</em>.</div>
+          </div>
+          <div class="vm-step">
+            <div class="vm-step-num">3</div>
+            <div>Tap <em>Save to Files</em> → choose <em>On My iPhone</em> or <em>iCloud Drive</em>.</div>
+          </div>
+          <div class="vm-step">
+            <div class="vm-step-num">4</div>
+            <div>Come back here, tap <em>Import File</em>, then <em>Browse</em> to find the saved file.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vm-tip">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span><strong>Easiest path:</strong> Use the <em>Record Now</em> tab to capture directly in this app — no exporting needed.</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RECORD TAB -->
+  <div class="tab-panel" id="panelRecord">
+    <div class="record-panel" id="recordPanel">
+      <canvas id="liveMeterCanvas" width="800" height="56"></canvas>
+      <div class="rec-timer" id="recTimer">00:00</div>
+      <div class="rec-status" id="recStatus">Tap the microphone to start recording</div>
+      <button class="mic-btn" id="micBtn" onclick="window.studioVoice && window.studioVoice.toggleRecording()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/>
+          <path d="M19 10v2a7 7 0 01-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+      </button>
+      <button class="stop-btn" id="stopRecBtn" onclick="window.studioVoice && window.studioVoice.stopRecording()">
+        <svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+        Stop &amp; Polish
+      </button>
+      <p class="rec-note">Microphone access required. Your audio is processed entirely on-device — nothing is uploaded to any server.</p>
     </div>
   </div>
 
@@ -979,6 +1376,26 @@
 
 <script>
 // ═══════════════════════════════════════════════════════════
+//  Tab & Guide helpers (global, called from inline onclick)
+// ═══════════════════════════════════════════════════════════
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tabImport').classList.toggle('active', tab === 'import');
+  document.getElementById('tabRecord').classList.toggle('active', tab === 'record');
+  document.getElementById('panelImport').classList.toggle('active', tab === 'import');
+  document.getElementById('panelRecord').classList.toggle('active', tab === 'record');
+}
+
+function toggleVMGuide() {
+  const toggle = document.getElementById('vmGuideToggle');
+  const body   = document.getElementById('vmGuideBody');
+  toggle.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+// ═══════════════════════════════════════════════════════════
 //  StudioVoice — Audio Processing Engine
 // ═══════════════════════════════════════════════════════════
 
@@ -998,8 +1415,159 @@ class StudioVoice {
     this.bindUpload();
     this.bindControls();
     this.bindButtons();
+    this.bindRecorder();
     this.initVUMeters();
     this.animateVU();
+  }
+
+  // ── RECORDER STATE ───────────────────────────────────────
+  // (set in bindRecorder)
+  /* mediaRecorder, recChunks, recStream, recAnalyser,
+     recTimerInterval, recStartTime, recAnimFrame */
+
+  // ── RECORDER ────────────────────────────────────────────
+  bindRecorder() {
+    this.mediaRecorder  = null;
+    this.recChunks      = [];
+    this.recStream      = null;
+    this.recAnalyser    = null;
+    this.recTimerInterval = null;
+    this.recStartTime   = 0;
+    this.recAnimFrame   = null;
+  }
+
+  async toggleRecording() {
+    if (this.mediaRecorder && this.mediaRecorder.state === 'recording') {
+      this.stopRecording();
+    } else {
+      await this.startRecording();
+    }
+  }
+
+  async startRecording() {
+    try {
+      this.recStream = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: false, noiseSuppression: false, sampleRate: 44100 }
+      });
+    } catch (err) {
+      alert('Microphone access denied. Please allow microphone access in your browser/device settings and try again.');
+      return;
+    }
+
+    // Live level meter via AnalyserNode
+    if (!this.audioCtx) {
+      this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    const src = this.audioCtx.createMediaStreamSource(this.recStream);
+    this.recAnalyser = this.audioCtx.createAnalyser();
+    this.recAnalyser.fftSize = 256;
+    src.connect(this.recAnalyser);
+    this.drawLiveMeter();
+
+    // Choose best supported format (iOS Safari needs audio/mp4)
+    const mimeType = ['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus','audio/mp4','audio/mpeg']
+      .find(m => MediaRecorder.isTypeSupported(m)) || '';
+
+    this.recChunks = [];
+    this.mediaRecorder = new MediaRecorder(this.recStream, mimeType ? { mimeType } : {});
+    this.mediaRecorder.ondataavailable = e => { if (e.data.size > 0) this.recChunks.push(e.data); };
+    this.mediaRecorder.onstop = () => this.handleRecordingStop();
+    this.mediaRecorder.start(250); // collect chunks every 250ms
+
+    // UI
+    this.recStartTime = Date.now();
+    this.recTimerInterval = setInterval(() => this.updateRecTimer(), 500);
+    document.getElementById('micBtn').classList.add('active');
+    document.getElementById('stopRecBtn').classList.add('visible');
+    document.getElementById('recordPanel').classList.add('recording');
+    document.getElementById('recStatus').innerHTML = '<span class="rec-dot"></span> Recording…';
+    document.getElementById('recTimer').classList.add('active');
+  }
+
+  stopRecording() {
+    if (!this.mediaRecorder || this.mediaRecorder.state === 'inactive') return;
+    this.mediaRecorder.stop();
+    this.recStream.getTracks().forEach(t => t.stop());
+    clearInterval(this.recTimerInterval);
+    cancelAnimationFrame(this.recAnimFrame);
+
+    // UI
+    document.getElementById('micBtn').classList.remove('active');
+    document.getElementById('stopRecBtn').classList.remove('visible');
+    document.getElementById('recordPanel').classList.remove('recording');
+    document.getElementById('recStatus').textContent = 'Processing your recording…';
+    document.getElementById('recTimer').classList.remove('active');
+  }
+
+  async handleRecordingStop() {
+    const mimeType = this.mediaRecorder.mimeType || 'audio/webm';
+    const blob = new Blob(this.recChunks, { type: mimeType });
+
+    // Give it a timestamped name
+    const now = new Date();
+    const name = `Recording ${now.toLocaleDateString()} ${now.toLocaleTimeString()}.m4a`;
+
+    // Decode via AudioContext (handles all formats the browser recorded)
+    try {
+      const arrayBuffer = await blob.arrayBuffer();
+      this.originalBuffer = await this.audioCtx.decodeAudioData(arrayBuffer);
+    } catch (err) {
+      document.getElementById('recStatus').textContent = 'Decoding failed. Try a different browser.';
+      return;
+    }
+
+    if (this.originalURL) URL.revokeObjectURL(this.originalURL);
+    this.originalURL = URL.createObjectURL(blob);
+
+    // Show metadata
+    const duration = this.formatTime(this.originalBuffer.duration);
+    document.getElementById('fileName').textContent  = name;
+    document.getElementById('fileMeta').textContent  =
+      `${duration} · Live recording · ${(this.originalBuffer.sampleRate/1000).toFixed(1)} kHz`;
+    document.getElementById('fileInfo').classList.add('visible');
+    document.getElementById('waveTime').textContent  = duration;
+
+    this.drawWaveform(this.originalBuffer);
+    document.getElementById('waveformSection').classList.add('visible');
+    document.getElementById('studioPanel').classList.add('visible');
+    document.getElementById('processSection').classList.add('visible');
+    document.getElementById('resultsSection').classList.remove('visible');
+
+    // Switch back to import tab view (not needed, but scroll helps)
+    document.getElementById('recStatus').textContent = 'Ready — scroll down to polish!';
+    setTimeout(() => {
+      document.getElementById('studioPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+
+  drawLiveMeter() {
+    const canvas = document.getElementById('liveMeterCanvas');
+    const ctx    = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const bufLen = this.recAnalyser.frequencyBinCount;
+    const data   = new Uint8Array(bufLen);
+
+    const draw = () => {
+      this.recAnimFrame = requestAnimationFrame(draw);
+      this.recAnalyser.getByteFrequencyData(data);
+      ctx.clearRect(0, 0, W, H);
+      const barW = (W / bufLen) * 2.5;
+      let x = 0;
+      for (let i = 0; i < bufLen; i++) {
+        const pct = data[i] / 255;
+        const barH = pct * H;
+        const hue = 160 + pct * 60; // cyan → amber
+        ctx.fillStyle = `hsla(${hue}, 90%, 55%, 0.85)`;
+        ctx.fillRect(x, H - barH, barW - 1, barH);
+        x += barW;
+      }
+    };
+    draw();
+  }
+
+  updateRecTimer() {
+    const elapsed = Math.floor((Date.now() - this.recStartTime) / 1000);
+    document.getElementById('recTimer').textContent = this.formatTime(elapsed);
   }
 
   // ── UPLOAD ──────────────────────────────────────────────
